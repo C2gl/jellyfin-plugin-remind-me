@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Jellyfin.Plugin.NextInSeries</name>
+    </assembly>
+    <members>
+        <member name="T:Jellyfin.Plugin.Template.Configuration.PluginConfiguration">
+            <summary>
+            Plugin configuration.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.Template.Configuration.PluginConfiguration.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Plugin.Template.Configuration.PluginConfiguration"/> class.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.Template.Configuration.PluginConfiguration.EnableAutoQueue">
+            <summary>
+            Gets or sets a value indicating whether auto-queuing is enabled.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.Template.Configuration.PluginConfiguration.RequireFullWatchPercentage">
+            <summary>
+            Gets or sets the percentage of movie that must be watched to trigger next movie queuing.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.Template.Configuration.PluginConfiguration.OnlyForCollections">
+            <summary>
+            Gets or sets a value indicating whether to only work with items in collections.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.Template.Configuration.PluginConfiguration.DelayMinutes">
+            <summary>
+            Gets or sets delay in minutes before adding next movie to continue watching.
+            </summary>
+        </member>
+        <member name="T:Jellyfin.Plugin.Template.Plugin">
+            <summary>
+            The main plugin.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.Template.Plugin.#ctor(MediaBrowser.Common.Configuration.IApplicationPaths,MediaBrowser.Model.Serialization.IXmlSerializer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Plugin.Template.Plugin"/> class.
+            </summary>
+            <param name="applicationPaths">Instance of the <see cref="T:MediaBrowser.Common.Configuration.IApplicationPaths"/> interface.</param>
+            <param name="xmlSerializer">Instance of the <see cref="T:MediaBrowser.Model.Serialization.IXmlSerializer"/> interface.</param>
+        </member>
+        <member name="P:Jellyfin.Plugin.Template.Plugin.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:Jellyfin.Plugin.Template.Plugin.Id">
+            <inheritdoc />
+        </member>
+        <member name="P:Jellyfin.Plugin.Template.Plugin.Instance">
+            <summary>
+            Gets the current plugin instance.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.Template.Plugin.GetPages">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
