@@ -2,35 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Template</title>
+    <title>Next in Series Configuration</title>
 </head>
 <body>
-    <div id="TemplateConfigPage" data-role="page" class="page type-interior pluginConfigurationPage" data-require="emby-input,emby-button,emby-select,emby-checkbox">
+    <div id="NextInSeriesConfigPage" data-role="page" class="page type-interior pluginConfigurationPage" data-require="emby-input,emby-button,emby-select,emby-checkbox">
         <div data-role="content">
             <div class="content-primary">
-                <form id="TemplateConfigForm">
-                    <div class="selectContainer">
-                        <label class="selectLabel" for="Options">Several Options</label>
-                        <select is="emby-select" id="Options" name="Options" class="emby-select-withcolor emby-select">
-                            <option id="optOneOption" value="OneOption">One Option</option>
-                            <option id="optAnotherOption" value="AnotherOption">Another Option</option>
-                        </select>
+                <form id="NextInSeriesConfigForm">
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="EnableAutoQueue" name="EnableAutoQueue" type="checkbox" is="emby-checkbox" />
+                            <span>Enable Auto-Queue Next Movie</span>
+                        </label>
+                        <div class="fieldDescription">Automatically add the next movie in a series to Continue Watching when a movie is finished</div>
                     </div>
                     <div class="inputContainer">
-                        <label class="inputLabel inputLabelUnfocused" for="AnInteger">An Integer</label>
-                        <input id="AnInteger" name="AnInteger" type="number" is="emby-input" min="0" />
-                        <div class="fieldDescription">A Description</div>
+                        <label class="inputLabel inputLabelUnfocused" for="RequireFullWatchPercentage">Watch Percentage Required</label>
+                        <input id="RequireFullWatchPercentage" name="RequireFullWatchPercentage" type="number" is="emby-input" min="0" max="100" />
+                        <div class="fieldDescription">Percentage of movie that must be watched before queuing the next movie (0-100)</div>
                     </div>
                     <div class="checkboxContainer checkboxContainer-withDescription">
                         <label class="emby-checkbox-label">
-                            <input id="TrueFalseSetting" name="TrueFalseCheckBox" type="checkbox" is="emby-checkbox" />
-                            <span>A Checkbox</span>
+                            <input id="OnlyForCollections" name="OnlyForCollections" type="checkbox" is="emby-checkbox" />
+                            <span>Only Work with Collections</span>
                         </label>
+                        <div class="fieldDescription">Only queue next movies for items that are part of a collection</div>
                     </div>
                     <div class="inputContainer">
-                        <label class="inputLabel inputLabelUnfocused" for="AString">A String</label>
-                        <input id="AString" name="AString" type="text" is="emby-input" />
-                        <div class="fieldDescription">Another Description</div>
+                        <label class="inputLabel inputLabelUnfocused" for="DelayMinutes">Delay Before Queuing (minutes)</label>
+                        <input id="DelayMinutes" name="DelayMinutes" type="number" is="emby-input" min="0" />
+                        <div class="fieldDescription">Optional delay in minutes before adding next movie to Continue Watching</div>
                     </div>
                     <div>
                         <button is="emby-button" type="submit" class="raised button-submit block emby-button">
@@ -41,31 +42,31 @@
             </div>
         </div>
         <script type="text/javascript">
-            var TemplateConfig = {
-                pluginUniqueId: 'eb5d7894-8eef-4b36-aa6f-5d124e828ce1'
+            var NextInSeriesConfig = {
+                pluginUniqueId: '12345678-9abc-def0-1234-56789abcdef0'
             };
 
-            document.querySelector('#TemplateConfigPage')
+            document.querySelector('#NextInSeriesConfigPage')
                 .addEventListener('pageshow', function() {
                     Dashboard.showLoadingMsg();
-                    ApiClient.getPluginConfiguration(TemplateConfig.pluginUniqueId).then(function (config) {
-                        document.querySelector('#Options').value = config.Options;
-                        document.querySelector('#AnInteger').value = config.AnInteger;
-                        document.querySelector('#TrueFalseSetting').checked = config.TrueFalseSetting;
-                        document.querySelector('#AString').value = config.AString;
+                    ApiClient.getPluginConfiguration(NextInSeriesConfig.pluginUniqueId).then(function (config) {
+                        document.querySelector('#EnableAutoQueue').checked = config.EnableAutoQueue;
+                        document.querySelector('#RequireFullWatchPercentage').value = config.RequireFullWatchPercentage;
+                        document.querySelector('#OnlyForCollections').checked = config.OnlyForCollections;
+                        document.querySelector('#DelayMinutes').value = config.DelayMinutes;
                         Dashboard.hideLoadingMsg();
                     });
                 });
 
-            document.querySelector('#TemplateConfigForm')
+            document.querySelector('#NextInSeriesConfigForm')
                 .addEventListener('submit', function(e) {
                 Dashboard.showLoadingMsg();
-                ApiClient.getPluginConfiguration(TemplateConfig.pluginUniqueId).then(function (config) {
-                    config.Options = document.querySelector('#Options').value;
-                    config.AnInteger = document.querySelector('#AnInteger').value;
-                    config.TrueFalseSetting = document.querySelector('#TrueFalseSetting').checked;
-                    config.AString = document.querySelector('#AString').value;
-                    ApiClient.updatePluginConfiguration(TemplateConfig.pluginUniqueId, config).then(function (result) {
+                ApiClient.getPluginConfiguration(NextInSeriesConfig.pluginUniqueId).then(function (config) {
+                    config.EnableAutoQueue = document.querySelector('#EnableAutoQueue').checked;
+                    config.RequireFullWatchPercentage = parseInt(document.querySelector('#RequireFullWatchPercentage').value);
+                    config.OnlyForCollections = document.querySelector('#OnlyForCollections').checked;
+                    config.DelayMinutes = parseInt(document.querySelector('#DelayMinutes').value);
+                    ApiClient.updatePluginConfiguration(NextInSeriesConfig.pluginUniqueId, config).then(function (result) {
                         Dashboard.processPluginConfigurationUpdateResult(result);
                     });
                 });
