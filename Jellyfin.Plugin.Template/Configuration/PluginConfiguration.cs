@@ -39,14 +39,3 @@ public class PluginConfiguration : BasePluginConfiguration
     /// </summary>
     public int DelayMinutes { get; set; }
 }
-
-    /// <summary>
-    /// Gets or sets a string setting.
-    /// </summary>
-    public string AString { get; set; }
-
-    /// <summary>
-    /// Gets or sets an enum option.
-    /// </summary>
-    public SomeOptions Options { get; set; }
-}
